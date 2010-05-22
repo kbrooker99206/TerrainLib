@@ -18,9 +18,12 @@ namespace TerrainLib
 
 		//This function returns the IFF File Object.
 		IFFLib::IFF* getIFFObject() {return mObject;}
+		std::vector<MFAM*>* getFractalFamilies() {return &FractalFamilies;}
+		std::vector<FFAM*>* getFloraFamilies() {return &FloraFamilies;}
+		std::vector<LAYER*>* getLayers() {return &layers;}
 
 	private:
-		void _handleBasicData(unsigned char* data);
+		void _handleBasicData(unsigned char* data, unsigned int dataSize);
 		LAYER* Trn::_loadLayer(IFFLib::IFF::NODE* parent);
 
 		//This is the actual IFF file on disk that represents the terrain file. It is used when loading the terrain.
@@ -36,7 +39,7 @@ namespace TerrainLib
 		float map_width;
 		float chunk_width;
 		int   tiles_per_chunk;
-		int   use_global_water_table;
+		int   header_type;
 		float global_water_height;
 		float water_shader_size;
 		unsigned char* water_shader_name;

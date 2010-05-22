@@ -128,7 +128,7 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 			{
 				if(nameStart[3] == 'R')
 				{
-					layer = new AHFR(node->children[1]->data, node->children[1]->size);
+					layer = new AHFR(node->children[1]->children[0]->data, node->children[1]->children[0]->size);
 				}
 				else if(nameStart[3] == 'T')
 				{
@@ -207,7 +207,7 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 			{
 				if(nameStart[3] == 'L')
 				{
-					layer = new BPLN(node->children[1]->data, node->children[1]->size);
+					layer = new BPOL(node->children[1]->data, node->children[1]->size);
 				}
 			}
 		}
@@ -352,14 +352,21 @@ AHCN::AHCN(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AHCN;
 
-	//LAYER READING CODE GOES HERE
+	memcpy(&unk1, &data[0], 4);
+	memcpy(&unk2, &data[4], 4);
+
+	//printf("C: %d %f\n", unk1, unk2);
 }
 
 AHFR::AHFR(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AHFR;
 
-	//LAYER READING CODE GOES HERE
+	memcpy(&unk1, &data[0], 4);
+	memcpy(&unk2, &data[4], 4);
+	memcpy(&unk3, &data[8], 4);
+
+	//printf("F: %d %d %f\n", unk1, unk2, unk3);
 }
 
 AHFT::AHFT(unsigned char* data, unsigned int dataSize)
@@ -411,14 +418,49 @@ BPOL::BPOL(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_BPOL;
 
-	//LAYER READING CODE GOES HERE
+	unsigned int sizeTemp;
+	unsigned int i=0;
+	memcpy(&sizeTemp, &data[0], 4); i+=4;
+
+	for(unsigned int j = 0; j < sizeTemp; j++)
+	{
+		float tempX;
+		float tempY;
+		memcpy(&tempX, &data[i], 4); i+=4;
+		memcpy(&tempY, &data[i], 4); i+=4;
+
+		verts.push_back(new VERTEX(tempX, tempY));
+	}
+
+	memcpy(&feather_type, &data[i], 4); i+=4;
+	memcpy(&shore_smoothness, &data[i], 4); i+=4;
+	memcpy(&is_water, &data[i], 4); i+=4;
+	memcpy(&water_height, &data[i], 4); i+=4;
+	memcpy(&water_shader_size, &data[i], 4); i+=4;
+	water_shader = &data[i];
 }
 
 BPLN::BPLN(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_BPLN;
+	unsigned int sizeTemp;
+	unsigned int i=0;
+	memcpy(&sizeTemp, &data[0], 4); i+=4;
 
-	//LAYER READING CODE GOES HERE
+	for(unsigned int j = 0; j < sizeTemp; j++)
+	{
+		float tempX;
+		float tempY;
+		memcpy(&tempX, &data[i], 4); i+=4;
+		memcpy(&tempY, &data[i], 4); i+=4;
+
+		verts.push_back(new VERTEX(tempX, tempY));
+	}
+
+	memcpy(&feather_type, &data[i], 4); i+=4;
+
+	memcpy(&feather_amount, &data[i], 4); i+=4;
+	memcpy(&line_width, &data[i], 4); i+=4;
 }
 
 BCIR::BCIR(unsigned char* data, unsigned int dataSize)
@@ -432,7 +474,7 @@ BCIR::BCIR(unsigned char* data, unsigned int dataSize)
 	memcpy(&feather_type, &data[12], 4);
 	memcpy(&feather_amount, &data[16], 4);
 
-	printf("==BCIR==\nPOS: (%f,%f)\nRAD: %f\nFeather Type: (%d)\nFeather Amount: (%f)\n", x, y, rad, feather_type, feather_amount);
+	//printf("==BCIR==\nPOS: (%f,%f)\nRAD: %f\nFeather Type: (%d)\nFeather Amount: (%f)\n", x, y, rad, feather_type, feather_amount);
 }
 
 AFSC::AFSC(unsigned char* data, unsigned int dataSize)

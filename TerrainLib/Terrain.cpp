@@ -18,7 +18,7 @@ Trn::Trn(std::string trnFile)
 		std::list<IFF::NODE*>::iterator end = ptats.end();
 		while(it != end)
 		{
-			_handleBasicData((*it)->children.at(0)->data);
+			_handleBasicData((*it)->children.at(0)->data, (*it)->children.at(0)->size);
 			it++;
 		}
 
@@ -103,8 +103,6 @@ Trn::Trn(std::string trnFile)
 				}
 			}
 
-			std::list<LAYER*> tempLayers;
-
 			//Now for the Layers
 			for(unsigned int i=0; i < mObject->mHeads.size(); i++)
 			{
@@ -122,7 +120,7 @@ Trn::Trn(std::string trnFile)
 	
 					while(jt != jend)
 					{
-						tempLayers.push_back(_loadLayer((*jt)->children[0]));
+						layers.push_back(_loadLayer((*jt)->children[0]));
 						jt++;
 					}
 					it++;
@@ -144,7 +142,7 @@ Trn::Trn(std::string trnFile)
 	}
 }
 
-void Trn::_handleBasicData(unsigned char* data)
+void Trn::_handleBasicData(unsigned char* data, unsigned int dataSize)
 {
 	unsigned int i=0;
 	//Read filename;
@@ -158,7 +156,7 @@ void Trn::_handleBasicData(unsigned char* data)
 	//Read tiles_per_chunk;
 	memcpy(&tiles_per_chunk, &data[i], 4); i+=4;
 	//Read use_global_water_table;
-	memcpy(&use_global_water_table, &data[i], 4); i+=4;
+	memcpy(&header_type, &data[i], 4); i+=4;
 	//Read global_water_height;
 	memcpy(&global_water_height, &data[i], 4); i+=4;
 	//Read water_shader_size;
@@ -169,9 +167,6 @@ void Trn::_handleBasicData(unsigned char* data)
 	++i;
 	//Read seconds_per_world_cycle;
 	memcpy(&seconds_per_world_cycle, &data[i], 4); i+=4;
-
-	//Read Unk Data
-
 }
 
 LAYER* Trn::_loadLayer(IFF::NODE* parent)

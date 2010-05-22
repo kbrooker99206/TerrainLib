@@ -72,9 +72,6 @@
     <ClInclude Include="FSLP.h">
       <Filter>Trn\Layers\Filters</Filter>
     </ClInclude>
-    <ClInclude Include="FSHD.h">
-      <Filter>Trn\Layers\Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="AHCN.h">
       <Filter>Trn\Layers\Height</Filter>
     </ClInclude>
@@ -114,13 +111,16 @@
     <ClInclude Include="ARIV.h">
       <Filter>Trn\Layers\Other</Filter>
     </ClInclude>
+    <ClInclude Include="FDIR.h">
+      <Filter>Trn\Layers\Filters</Filter>
+    </ClInclude>
     <ClInclude Include="AHTR.h">
-      <Filter>Trn\Layers\Other</Filter>
+      <Filter>Trn\Layers\Height</Filter>
     </ClInclude>
     <ClInclude Include="ASRP.h">
-      <Filter>Trn\Layers\Other</Filter>
+      <Filter>Trn\Layers\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="FDIR.h">
+    <ClInclude Include="FSHD.h">
       <Filter>Trn\Layers\Filters</Filter>
     </ClInclude>
   </ItemGroup>

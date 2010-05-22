@@ -51,8 +51,9 @@ namespace IFFLib
 	
 		std::vector<NODE*> mHeads;
 
+		static void _memFlipper(unsigned int* data);
+
 	private:
-		void _memFlipper(unsigned int* data);
 		unsigned int _getNodeNameSize(char* data);
 		unsigned int _readNodes(FILE** input, IFF::NODE* parentNode);
 	};

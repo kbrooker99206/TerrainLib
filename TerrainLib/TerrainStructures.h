@@ -55,7 +55,7 @@ public:
 
 		unsigned char* appearance_name;
 		float unk1;
-		float unk2; //Type unknown!
+		int   unk2;
 		float unk3;
 		float unk4;
 		int   unk5;
@@ -136,7 +136,7 @@ public:
 	float unk9;
 	float unk10;
 	float unk11;
-	int   unk12; //type unknown
+	float unk12;
 	int   unk13;
 };
 

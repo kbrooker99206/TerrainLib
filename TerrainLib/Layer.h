@@ -7,6 +7,15 @@
 namespace TerrainLib
 {
 
+	class VERTEX
+	{
+	public:
+		VERTEX(float ix, float iy) { x = ix; y = iy;}
+
+		float x;
+		float y;
+	};
+
 	enum LAYER_TYPE
 	{
 		LAYER_NONE = 0,
