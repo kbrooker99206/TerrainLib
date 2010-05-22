@@ -1,0 +1,16 @@
+# These files should be ignored
+Debug/
+Release/
+ipch/
+*.cache
+*.zip
+*.7z
+*.tmp_*Win32.vcproj
+*.user
+*.ncb
+*.suo
+*.sdf
+*.opensdf
+*.lnk
+*.trn
+.DS_Store

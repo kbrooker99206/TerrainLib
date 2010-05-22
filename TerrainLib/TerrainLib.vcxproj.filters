@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="IFF">
+      <UniqueIdentifier>{7168b9ff-d445-46f9-920b-78627223adc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn">
+      <UniqueIdentifier>{1796a632-992d-438b-b755-bac743f7cac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn\Layers">
+      <UniqueIdentifier>{d13801bd-f21e-4096-9df0-0fce7ab103f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn\Layers\Boundries">
+      <UniqueIdentifier>{2f8c72a1-447a-448b-b159-d04695b7e58e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn\Layers\Filters">
+      <UniqueIdentifier>{24553c36-30a7-4a13-b95a-23015faf2da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn\Layers\Height">
+      <UniqueIdentifier>{9cbc7e8d-86d5-4dcc-959b-eafc751d98e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn\Layers\Flora">
+      <UniqueIdentifier>{03da1ea0-b13b-4dfd-ba3f-40b70dd61ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn\Layers\Other">
+      <UniqueIdentifier>{0c4770aa-fa31-44a2-ae58-e73af3fcd5f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trn\Layers\Shaders">
+      <UniqueIdentifier>{5a268b94-45ae-4f3d-8b5c-f787f80322fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IFF.h">
+      <Filter>IFF</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Trn</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainStructures.h">
+      <Filter>Trn</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Trn\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="BCIR.h">
+      <Filter>Trn\Layers\Boundries</Filter>
+    </ClInclude>
+    <ClInclude Include="BPLN.h">
+      <Filter>Trn\Layers\Boundries</Filter>
+    </ClInclude>
+    <ClInclude Include="BPOL.h">
+      <Filter>Trn\Layers\Boundries</Filter>
+    </ClInclude>
+    <ClInclude Include="BREC.h">
+      <Filter>Trn\Layers\Boundries</Filter>
+    </ClInclude>
+    <ClInclude Include="FFRA.h">
+      <Filter>Trn\Layers\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="FHGT.h">
+      <Filter>Trn\Layers\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="ASCR.h">
+      <Filter>Trn\Layers\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ASCN.h">
+      <Filter>Trn\Layers\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ACCN.h">
+      <Filter>Trn\Layers\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="FSLP.h">
+      <Filter>Trn\Layers\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="FSHD.h">
+      <Filter>Trn\Layers\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="AHCN.h">
+      <Filter>Trn\Layers\Height</Filter>
+    </ClInclude>
+    <ClInclude Include="AHFR.h">
+      <Filter>Trn\Layers\Height</Filter>
+    </ClInclude>
+    <ClInclude Include="AHFT.h">
+      <Filter>Trn\Layers\Height</Filter>
+    </ClInclude>
+    <ClInclude Include="AFSC.h">
+      <Filter>Trn\Layers\Flora</Filter>
+    </ClInclude>
+    <ClInclude Include="AFSN.h">
+      <Filter>Trn\Layers\Flora</Filter>
+    </ClInclude>
+    <ClInclude Include="AFDN.h">
+      <Filter>Trn\Layers\Flora</Filter>
+    </ClInclude>
+    <ClInclude Include="AFDF.h">
+      <Filter>Trn\Layers\Flora</Filter>
+    </ClInclude>
+    <ClInclude Include="AROA.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="AEXC.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="ACRH.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="AENV.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="ACRF.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="ARIV.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="AHTR.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="ASRP.h">
+      <Filter>Trn\Layers\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="FDIR.h">
+      <Filter>Trn\Layers\Filters</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="IFF.cpp">
+      <Filter>IFF</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Trn</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainStructures.cpp">
+      <Filter>Trn</Filter>
+    </ClCompile>
+    <ClCompile Include="LayerLoad.cpp">
+      <Filter>Trn\Layers</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
