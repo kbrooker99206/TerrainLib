@@ -5,6 +5,8 @@ class FHGT : public TerrainLib::LAYER
 public:
 	FHGT(unsigned char* data, unsigned int dataSize);
 
-	unsigned char* data;
-	unsigned int size;
+	float minHeight;
+	float maxHeight;
+	int feather_type;
+	float feather_amount;
 };

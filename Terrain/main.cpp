@@ -25,12 +25,12 @@ int main( int argc, char* argv[])
 	system("pause");
 
 	char* name_array[] = {
+							"corellia",
 							"09",
 							"10",
 							"11",
 							"character_farm",
 							"cinco_city_test_m5",
-							"corellia",
 							"creature_test",
 							"dantooine",
 							"dathomir",
@@ -211,12 +211,7 @@ void outputLayerTree(FILE** output, std::vector<TerrainLib::LAYER*>* input, unsi
 					fprintf(*output, "\t");
 
 				AHTR* tempContainer = static_cast<AHTR*>(input->at(i));
-
-				fprintf(*output, "Height Terrace: ");
-				for(unsigned int j = 0; j < tempContainer->size; j++)
-					fprintf(*output, "%02X ", tempContainer->data[j]);
-
-				fprintf(*output, "\n");
+				fprintf(*output, "Height Terrace: Flat Ratio: (%f), Height Delta (%f)\n", tempContainer->flat_ratio, tempContainer->height_delta);
 			}
 			break;	
 		case TerrainLib::LAYER_FDIR:
@@ -253,12 +248,7 @@ void outputLayerTree(FILE** output, std::vector<TerrainLib::LAYER*>* input, unsi
 					fprintf(*output, "\t");
 
 				FHGT* tempContainer = static_cast<FHGT*>(input->at(i));
-
-				fprintf(*output, "Filter Height: ");
-				for(unsigned int j = 0; j < tempContainer->size; j++)
-					fprintf(*output, "%02X ", tempContainer->data[j]);
-
-				fprintf(*output, "\n");
+				fprintf(*output, "Filter Height: minHeight:(%f), maxHeight(%f), feather_type:(%d), feather_amount(%f)\n", tempContainer->minHeight, tempContainer->maxHeight, tempContainer->feather_type, tempContainer->feather_amount);
 			}
 			break;
 		case TerrainLib::LAYER_FSLP:
@@ -275,7 +265,6 @@ void outputLayerTree(FILE** output, std::vector<TerrainLib::LAYER*>* input, unsi
 				fprintf(*output, "\n");
 			}
 			break;
-
 		}
 	}
 }

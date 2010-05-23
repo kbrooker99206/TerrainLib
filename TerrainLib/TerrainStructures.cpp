@@ -1,5 +1,6 @@
 #include "TerrainStructures.h"
 #include <string>
+#include <string.h>
 
 using namespace TerrainLib;
 
@@ -11,14 +12,15 @@ SFAM::SFAM(unsigned char* data)
 	memcpy(&family_id, &data[i], 4); i += 4;
 
 	//Read family_name
-	family_name = &data[i];
-	while(data[i] != 0) ++i;
-	i++;
+
+	unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	family_name = new unsigned char[strLen];
+	memcpy(family_name, &data[i], strLen); i+= strLen;
 
 	//Read file_name
-	file_name = &data[i];
-	while(data[i] != 0) ++i;
-	i++;
+	strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	file_name = new unsigned char[strLen];
+	memcpy(file_name, &data[i], strLen); i+= strLen;
 
 	//Read unk1
 	memcpy(&unk1, &data[i], 1); ++i;
@@ -39,9 +41,9 @@ SFAM::SFAM(unsigned char* data)
 		SFAM_CHILD* pChild = new SFAM_CHILD();
 
 		//Read shader_name
-		pChild->shader_name = &data[i];
-		while(data[i] != 0) ++i;
-		++i;
+		unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+		pChild->shader_name = new unsigned char[strLen];
+		memcpy(pChild->shader_name, &data[i], strLen); i+= strLen;
 
 		//Read unk1
 		memcpy(&pChild->unk1, &data[i], 4); i+=4;
@@ -58,9 +60,9 @@ FFAM::FFAM(unsigned char* data)
 	memcpy(&family_id, &data[i], 4); i += 4;
 
 	//Read family_name
-	family_name = &data[i];
-	while(data[i] != 0) ++i;
-	i++;
+	unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	family_name = new unsigned char[strLen];
+	memcpy(family_name, &data[i], strLen); i+= strLen;
 
 	//Read unk1
 	memcpy(&unk1, &data[i], 1); ++i;
@@ -80,9 +82,9 @@ FFAM::FFAM(unsigned char* data)
 	{
 		FFAM_CHILD* pChild = new FFAM_CHILD();
 
-		pChild->appearance_name = &data[i];
-		while(data[i] != 0) ++i;
-		i++;
+		unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+		pChild->appearance_name = new unsigned char[strLen];
+		memcpy(pChild->appearance_name, &data[i], strLen); i+= strLen;
 
 		//Read unk1;
 		memcpy(&pChild->unk1, &data[i], 4); i+=4;
@@ -113,9 +115,9 @@ RFAM::RFAM(unsigned char* data)
 	memcpy(&family_id, &data[i], 4); i += 4;
 
 	//Read family_name
-	family_name = &data[i];
-	while(data[i] != 0) ++i;
-	i++;
+	unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	family_name = new unsigned char[strLen];
+	memcpy(family_name, &data[i], strLen); i+= strLen;
 
 	//Read unk1
 	memcpy(&unk1, &data[i], 1); ++i;
@@ -133,9 +135,9 @@ RFAM::RFAM(unsigned char* data)
 	{
 		RFAM_CHILD* pChild = new RFAM_CHILD();
 
-		pChild->shader_name = &data[i];
-		while(data[i] != 0) ++i;
-		i++;
+		unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+		pChild->shader_name = new unsigned char[strLen];
+		memcpy(pChild->shader_name, &data[i], strLen); i+= strLen;
 
 		//Read unk1;
 		memcpy(&pChild->unk1, &data[i], 4); i+=4;
@@ -167,9 +169,9 @@ EFAM::EFAM(unsigned char* data)
 	//Read family_id;
 	memcpy(&family_id, &data[i], 4); i+=4;
 	//Read family_name;
-	family_name = &data[i];
-	while(data[i] != 0) ++i;
-	i++;
+	unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	family_name = new unsigned char[strLen];
+	memcpy(family_name, &data[i], strLen); i+= strLen;
 
 	//Read unk1;
 	memcpy(&unk1, &data[i], 1); ++i;
@@ -189,9 +191,9 @@ MFAM::MFAM(unsigned char* data, unsigned char* data2)
 	//Read fractal_id;
 	memcpy(&fractal_id, &data[i], 4); i+=4;
 	//Read fractal_label;
-	fractal_label = &data[i];
-	while(data[i] != 0) ++i;
-	i++;
+	unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	fractal_label = new unsigned char[strLen];
+	memcpy(fractal_label, &data[i], strLen); i+= strLen;
 
 	//Reset the counter
 	i=0;

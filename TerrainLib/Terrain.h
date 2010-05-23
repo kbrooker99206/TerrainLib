@@ -11,13 +11,14 @@ namespace TerrainLib
 	public:
 		Trn(std::string trnFile);
 
+		void SaveTerrain(std::string outputFile);
+
 		int getError() {return error;}
 
 		//This magical function returns the height of the terrain at a particular point.
 		//float getHeight(float x, float y);
 
 		//This function returns the IFF File Object.
-		IFFLib::IFF* getIFFObject() {return mObject;}
 		std::vector<MFAM*>* getFractalFamilies() {return &FractalFamilies;}
 		std::vector<FFAM*>* getFloraFamilies() {return &FloraFamilies;}
 		std::vector<LAYER*>* getLayers() {return &layers;}
@@ -36,9 +37,6 @@ namespace TerrainLib
 	private:
 		void _handleBasicData(unsigned char* data, unsigned int dataSize);
 		LAYER* Trn::_loadLayer(IFFLib::IFF::NODE* parent);
-
-		//This is the actual IFF file on disk that represents the terrain file. It is used when loading the terrain.
-		IFFLib::IFF* mObject;
 
 		//Indicates an error.
 		int error;

@@ -5,11 +5,9 @@ using namespace IFFLib;
 IFF::~IFF()
 {
 	//Clean up Heads
-	std::vector<NODE*>::iterator end = mHeads.end();
-	for(std::vector<NODE*>::iterator i = mHeads.begin(); i != end; i++)
+	for(unsigned int i=0; i < mHeads.size(); i++)
 	{
-		delete (*i);
-		mHeads.erase(i);
+		delete mHeads[i];
 	}
 }
 
@@ -19,17 +17,41 @@ IFF::NODE::~NODE()
 	if(data)
 	{
 		//Clean up Data
-		delete data;
+		delete[] data;
 		data = reinterpret_cast<unsigned char*>(0);
 	}
 
 	//Clean up Children
-	std::vector<NODE*>::iterator end = children.end();
-	for(std::vector<NODE*>::iterator i = children.begin(); i != end; i++)
+	std::vector<IFF::NODE*>::iterator it = children.begin();
+	std::vector<IFF::NODE*>::iterator end = children.end();
+
+	while(it != end)
 	{
-		delete (*i);
-		children.erase(i);
+		delete (*it);
+		it++;
 	}
+}
+
+unsigned int IFF::NODE::getAggregateSize()
+{
+	unsigned int returnSize = 0;
+
+	if(this->name[4] == 0)
+		returnSize += 8; // 4 name + 4 size
+	else
+		returnSize += 12; // 8 name + 4 size
+
+	if(this->children.size() != 0)
+	{
+		for(unsigned int i=0; i < this->children.size(); i++)
+		{
+			returnSize += this->children.at(i)->getAggregateSize();
+		}
+	}
+	else
+		returnSize += this->size;
+
+	return returnSize;
 }
 
 std::list<IFF::NODE*> IFF::NODE::searchTree(char name[9])
@@ -188,4 +210,39 @@ unsigned int IFF::_getNodeNameSize(char* data)
 	}
 
 	return 8;
+}
+
+void IFF::NODE::write(FILE** output)
+{
+	//Print Node Name
+	fprintf(*output, "%s", this->name);
+	//Print Node Size (Make sure to flip!)
+	unsigned int ret = this->getAggregateSize();
+	IFF::_memFlipper(&ret);
+
+	fwrite(&ret, 4, 1, *output);
+	//Print Data or Children
+	if(this->children.size() > 0)
+	{
+		for(unsigned int i=0; i < this->children.size(); i++)
+		{
+			this->children.at(i)->write(output);
+		}
+	}
+	else
+	{
+		fwrite(&this->data, this->size, 1, *output);
+	}
+}
+
+void IFF::saveFile(std::string filename)
+{
+	FILE* output = fopen(filename.c_str(), "wb");
+
+	for(unsigned int i=0; i < this->mHeads.size(); i++)
+	{
+		this->mHeads.at(i)->write(&output);
+	}
+
+	fclose(output);
 }

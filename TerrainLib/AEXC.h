@@ -3,5 +3,5 @@
 class AEXC : public TerrainLib::LAYER
 {
 public:
-	AEXC(unsigned char* data, unsigned int dataSize);
+	AEXC();
 };

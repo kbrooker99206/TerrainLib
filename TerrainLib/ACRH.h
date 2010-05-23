@@ -4,6 +4,9 @@ class ACRH : public TerrainLib::LAYER
 {
 public:
 	ACRH(unsigned char* data, unsigned int dataSize);
+	
+	unsigned char* data;
+	unsigned int size;
 };
 
 

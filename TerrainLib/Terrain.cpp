@@ -8,7 +8,7 @@ Trn::Trn(std::string trnFile)
 {
 	try
 	{
-		mObject = new IFF();
+		IFFLib::IFF* mObject = new IFFLib::IFF();
 		IFF::retVal ret = mObject->readFile(trnFile);
 
 		//Load Basic Map Info
@@ -127,6 +127,8 @@ Trn::Trn(std::string trnFile)
 				}		
 			}
 
+			delete mObject;
+
 			error = 0;
 		}
 		else if(ret == IFF::READ_FILE_BAD_FILE)
@@ -146,9 +148,9 @@ void Trn::_handleBasicData(unsigned char* data, unsigned int dataSize)
 {
 	unsigned int i=0;
 	//Read filename;
-	filename = &data[i];
-	while(data[i] != 0) ++i;
-	++i;
+	unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	filename = new unsigned char[strLen];
+	memcpy(filename, &data[i], strLen); i+= strLen;
 	//Read map_width;
 	memcpy(&map_width, &data[i], 4); i+=4;
 	//Read chunk_width;
@@ -162,9 +164,9 @@ void Trn::_handleBasicData(unsigned char* data, unsigned int dataSize)
 	//Read water_shader_size;
 	memcpy(&water_shader_size, &data[i], 4); i+=4;
 	//Read water_shader_name;
-	water_shader_name = &data[i];
-	while(data[i] != 0) ++i;
-	++i;
+	strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	water_shader_name = new unsigned char[strLen];
+	memcpy(water_shader_name, &data[i], strLen); i+= strLen;
 	//Read seconds_per_world_cycle;
 	memcpy(&seconds_per_world_cycle, &data[i], 4); i+=4;
 }
@@ -187,7 +189,9 @@ LAYER* Trn::_loadLayer(IFF::NODE* parent)
 
 				memcpy(&result->enabled, &tempData[0], 4);
 
-				result->customName = &tempData[4];
+				unsigned int strLen = strlen(const_cast<const char*>((char*)&tempData[4])) + 1;
+				result->customName = new unsigned char[strLen];
+				memcpy(water_shader_name, &tempData[4], strLen);
 				
 			}
 			else if(strcmp((*it)->name, "ADTA") == 0)
@@ -199,7 +203,9 @@ LAYER* Trn::_loadLayer(IFF::NODE* parent)
 				memcpy(&result->unk3, &tempData[4], 4);
 				memcpy(&result->unk4, &tempData[8], 4);
 
-				result->description = &tempData[9];
+				unsigned int strLen = strlen(const_cast<const char*>((char*)&tempData[9])) + 1;
+				result->description = new unsigned char[strLen];
+				memcpy(result->description, &tempData[9], strLen);
 			}
 			else
 			{
@@ -222,3 +228,7 @@ LAYER* Trn::_loadLayer(IFF::NODE* parent)
 	}
 }
 
+void SaveTerrain(std::string outputFile)
+{
+
+}

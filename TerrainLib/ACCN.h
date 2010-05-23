@@ -4,4 +4,7 @@ class ACCN : public TerrainLib::LAYER
 {
 public:
 	ACCN(unsigned char* data, unsigned int dataSize);
+
+	unsigned char* data;
+	unsigned int size;
 };

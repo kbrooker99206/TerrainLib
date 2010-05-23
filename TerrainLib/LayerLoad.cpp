@@ -64,7 +64,7 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 			{
 				if(nameStart[3] == 'F')
 				{
-					layer = new ACRF(node->children[1]->data, node->children[1]->size);
+					layer = new ACRF(node->children[1]->children[0]->data, node->children[1]->children[0]->size);
 				}
 				else if(nameStart[3] == 'H')
 				{
@@ -85,7 +85,7 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 			{
 				if(nameStart[3] == 'C')
 				{
-					layer = new AEXC(node->children[1]->data, node->children[1]->size);
+					layer = new AEXC();
 				}
 			}
 		}
@@ -144,14 +144,20 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 			{
 				if(nameStart[3] == 'V')
 				{
-					layer = new ARIV(node->children[1]->data, node->children[1]->size);
+					layer = new ARIV(	node->children[1]->children[0]->children[0]->children[0]->data, 
+										node->children[1]->children[0]->children[0]->children[0]->size, 
+										node->children[1]->children[1]->data, 
+										node->children[1]->children[1]->size);
 				}
 			}
 			else if(nameStart[2] == 'O')
 			{
 				if(nameStart[3] == 'A')
 				{
-					layer = new AROA(node->children[1]->data, node->children[1]->size);
+					layer = new AROA(	node->children[1]->children[0]->children[0]->children[0]->data, 
+										node->children[1]->children[0]->children[0]->children[0]->size, 
+										node->children[1]->children[1]->data, 
+										node->children[1]->children[1]->size);
 				}
 			}
 		}
@@ -274,7 +280,10 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 		unsigned char* data = node->children[0]->children[0]->children[0]->data;
 
 		layer->enabled    = (data[0] == 1) ? true : false;
-		layer->customName = &data[4];
+		
+		unsigned int strLen = strlen(const_cast<const char*>((char*)&data[4])) + 1;
+		layer->customName = new unsigned char[strLen];
+		memcpy(layer->customName, &data[4], strLen);
 	}
 
 	return layer;
@@ -284,63 +293,81 @@ ACCN::ACCN(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ACCN;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 ASCN::ASCN(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ASCN;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 ASCR::ASCR(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ASCR;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 FSHD::FSHD(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ACCN;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 ACRF::ACRF(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ACRF;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 ACRH::ACRH(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ACRH;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 AENV::AENV(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AENV;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
-AEXC::AEXC(unsigned char* data, unsigned int dataSize)
+AEXC::AEXC()
 {
 	type = LAYER_AEXC;
-
-	//LAYER READING CODE GOES HERE
 }
 
-AROA::AROA(unsigned char* data, unsigned int dataSize)
+AROA::AROA(unsigned char* data, unsigned int dataSize, unsigned char* data2, unsigned int dataSize2)
 {
 	type = LAYER_AROA;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
+
+	this->data2 = new unsigned char[dataSize2];
+	memcpy(this->data2, data2, dataSize2);
+	this->size2 = dataSize2;
 }
 
 AHCN::AHCN(unsigned char* data, unsigned int dataSize)
@@ -368,7 +395,8 @@ FFRA::FFRA(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FFRA;
 
-	this->data = data;
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
 	this->size = dataSize;
 }
 
@@ -376,15 +404,23 @@ FHGT::FHGT(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FHGT;
 
-	this->data = data;
-	this->size = dataSize;
+	unsigned int i=0;
+
+	memcpy(&minHeight, &data[i], 4); i+=4;
+
+	memcpy(&maxHeight, &data[i], 4); i+=4;
+
+	memcpy(&feather_type, &data[i], 4); i+=4;
+	
+	memcpy(&feather_amount, &data[i], 4); i+=4;
 }
 
 FSLP::FSLP(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FSLP;
 
-	this->data = data;
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
 	this->size = dataSize;
 }
 
@@ -428,7 +464,10 @@ BPOL::BPOL(unsigned char* data, unsigned int dataSize)
 	memcpy(&is_water, &data[i], 4); i+=4;
 	memcpy(&water_height, &data[i], 4); i+=4;
 	memcpy(&water_shader_size, &data[i], 4); i+=4;
-	water_shader = &data[i];
+
+	unsigned int strLen = strlen(const_cast<const char*>((char*)&data[i])) + 1;
+	water_shader = new unsigned char[strLen];
+	memcpy(water_shader, &data[i], strLen); i+= strLen;
 }
 
 BPLN::BPLN(unsigned char* data, unsigned int dataSize)
@@ -472,58 +511,74 @@ AFSC::AFSC(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AFSC;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 AFSN::AFSN(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AFSN;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 AFDF::AFDF(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AFDF;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 AFDN::AFDN(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AFDN;
 
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
-ARIV::ARIV(unsigned char* data, unsigned int dataSize)
+ARIV::ARIV(unsigned char* data, unsigned int dataSize, unsigned char* data2, unsigned int dataSize2)
 {
 	type = LAYER_ARIV;
 
 	//These are generally unused and can be ignored.
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 
-	//LAYER READING CODE GOES HERE
+	this->data2 = new unsigned char[dataSize2];
+	memcpy(this->data2, data2, dataSize2);
+	this->size2 = dataSize2;
 }
 
 AHTR::AHTR(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AHTR;
 	
-	this->data = data;
-	this->size = dataSize;
+	memcpy(&flat_ratio, &data[0], 4);
+	memcpy(&height_delta, &data[4], 4);
 }
 
 ASRP::ASRP(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ASRP;
 	
-	//LAYER READING CODE GOES HERE
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
+	this->size = dataSize;
 }
 
 FDIR::FDIR(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FDIR;
 
-	this->data = data;
+	this->data = new unsigned char[dataSize];
+	memcpy(this->data, data, dataSize);
 	this->size = dataSize;
 }

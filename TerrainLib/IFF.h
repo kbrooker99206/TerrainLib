@@ -34,6 +34,8 @@ namespace IFFLib
 			~NODE();
 
 			std::list<NODE*> searchTree(char name[9]);
+			unsigned int getAggregateSize();
+			void write(FILE** output);
 
 			char name[9];
 			unsigned int size; //IFF Node Size
@@ -49,6 +51,8 @@ namespace IFFLib
 		//returns true on success, false on failure.
 		retVal readFile(std::string filename);
 	
+		void   saveFile(std::string filename);
+
 		std::vector<NODE*> mHeads;
 
 		static void _memFlipper(unsigned int* data);
