@@ -125,19 +125,18 @@ public:
 
 	//MFRCFORM
 
-	int   unk1;
-	int   unk2;
-	float unk3;
-	int   unk4;
-	float unk5;
-	int   unk6;
-	float unk7;
-	float unk8;
-	float unk9;
-	float unk10;
-	float unk11;
-	float unk12;
-	int   unk13;
+	int    seed;
+	int	   unk2;
+	float  unk3;
+	int    unk4;
+	float  unk5;
+	double unk6;
+	float  unk8;
+	float  unk9;
+	float  unk10;
+	float  unk11;
+	float  unk12;
+	int    unk13;
 };
 
 };

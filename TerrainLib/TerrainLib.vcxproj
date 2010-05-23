@@ -85,7 +85,6 @@
     <ClInclude Include="AFSN.h" />
     <ClInclude Include="AHCN.h" />
     <ClInclude Include="AHFR.h" />
-    <ClInclude Include="AHFT.h" />
     <ClInclude Include="AHTR.h" />
     <ClInclude Include="ARIV.h" />
     <ClInclude Include="AROA.h" />

@@ -21,7 +21,7 @@
 //Height
 #include "AHCN.h"
 #include "AHFR.h"
-#include "AHFT.h"
+#include "AHTR.h"
 
 //Flora
 #include "AFSC.h"
@@ -36,7 +36,6 @@
 #include "ARIV.h"
 #include "ACRF.h"
 #include "ACRH.h"
-#include "AHTR.h"
 #include "ASRP.h"
 
 using namespace TerrainLib;
@@ -129,10 +128,6 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 				if(nameStart[3] == 'R')
 				{
 					layer = new AHFR(node->children[1]->children[0]->data, node->children[1]->children[0]->size);
-				}
-				else if(nameStart[3] == 'T')
-				{
-					layer = new AHFT(node->children[1]->data, node->children[1]->size);
 				}
 			}
 			else if(nameStart[2] == 'T')
@@ -240,7 +235,7 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 			{
 				if(nameStart[3] == 'A')
 				{
-					layer = new FFRA(node->children[1]->data, node->children[1]->size);
+					layer = new FFRA(node->children[1]->children[0]->data, node->children[1]->children[0]->size);
 				}
 			}
 		}
@@ -369,32 +364,28 @@ AHFR::AHFR(unsigned char* data, unsigned int dataSize)
 	//printf("F: %d %d %f\n", unk1, unk2, unk3);
 }
 
-AHFT::AHFT(unsigned char* data, unsigned int dataSize)
-{
-	type = LAYER_AHFT;
-
-	//LAYER READING CODE GOES HERE
-}
-
 FFRA::FFRA(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FFRA;
 
-	//LAYER READING CODE GOES HERE
+	this->data = data;
+	this->size = dataSize;
 }
 
 FHGT::FHGT(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FHGT;
 
-	//LAYER READING CODE GOES HERE
+	this->data = data;
+	this->size = dataSize;
 }
 
 FSLP::FSLP(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FSLP;
 
-	//LAYER READING CODE GOES HERE
+	this->data = data;
+	this->size = dataSize;
 }
 
 BREC::BREC(unsigned char* data, unsigned int dataSize)
@@ -518,7 +509,8 @@ AHTR::AHTR(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_AHTR;
 	
-	//LAYER READING CODE GOES HERE
+	this->data = data;
+	this->size = dataSize;
 }
 
 ASRP::ASRP(unsigned char* data, unsigned int dataSize)
@@ -532,5 +524,6 @@ FDIR::FDIR(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_FDIR;
 
-	//LAYER READING CODE GOES HERE
+	this->data = data;
+	this->size = dataSize;
 }

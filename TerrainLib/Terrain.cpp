@@ -221,3 +221,4 @@ LAYER* Trn::_loadLayer(IFF::NODE* parent)
 		return tempResult;
 	}
 }
+

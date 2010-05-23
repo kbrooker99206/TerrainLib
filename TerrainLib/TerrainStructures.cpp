@@ -198,7 +198,7 @@ MFAM::MFAM(unsigned char* data, unsigned char* data2)
 
 	//Second Part
 	//Read unk1;
-	memcpy(&unk1 , &data2[i], 4); i+=4;
+	memcpy(&seed , &data2[i], 4); i+=4;
 	//Read unk2;
 	memcpy(&unk2 , &data2[i], 4); i+=4;
 	//Read unk3;
@@ -208,9 +208,9 @@ MFAM::MFAM(unsigned char* data, unsigned char* data2)
 	//Read unk5;
 	memcpy(&unk5 , &data2[i], 4); i+=4;
 	//Read unk6;
-	memcpy(&unk6 , &data2[i], 4); i+=4;
+	memcpy(&unk6 , &data2[i], 8); i+=8;
 	//Read unk7;
-	memcpy(&unk7 , &data2[i], 4); i+=4;
+	//memcpy(&unk7 , &data2[i], 4); i+=4;
 	//Read unk8;
 	memcpy(&unk8 , &data2[i], 4); i+=4;
 	//Read unk9;

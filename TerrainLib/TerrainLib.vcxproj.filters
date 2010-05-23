@@ -78,9 +78,6 @@
     <ClInclude Include="AHFR.h">
       <Filter>Trn\Layers\Height</Filter>
     </ClInclude>
-    <ClInclude Include="AHFT.h">
-      <Filter>Trn\Layers\Height</Filter>
-    </ClInclude>
     <ClInclude Include="AFSC.h">
       <Filter>Trn\Layers\Flora</Filter>
     </ClInclude>
