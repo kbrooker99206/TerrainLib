@@ -139,4 +139,57 @@ public:
 	int    unk13;
 };
 
+class HEADER
+{
+public:
+	//Basic Data
+	unsigned char* filename;
+	float map_width;
+	float chunk_width;
+	int   tiles_per_chunk;
+	int   header_type;
+	float global_water_height;
+	float water_shader_size;
+	unsigned char* water_shader_name;
+	float seconds_per_world_cycle;
+
+	float Collidable_MinDist;
+	float Collidable_MaxDist;
+	float Collidable_TileSize;
+	float Collidable_TileBorder;
+	float Collidable_Seed;
+
+	float NonCollidable_MinDist;
+	float NonCollidable_MaxDist;
+	float NonCollidable_TileSize;
+	float NonCollidable_TileBorder;
+	float NonCollidable_Seed;
+
+	float NearRadial_MinDist;
+	float NearRadial_MaxDist;
+	float NearRadial_TileSize;
+	float NearRadial_TileBorder;
+	float NearRadial_Seed;
+
+	float FarRadial_MinDist;
+	float FarRadial_MaxDist;
+	float FarRadial_TileSize;
+	float FarRadial_TileBorder;
+	float FarRadial_Seed;
+};
+
+class FOOTER
+{
+public:
+	float gameWidth;
+	float   chunkGameWidth; //width of a chunk
+	int   chunkBitFieldSize;
+	int   bitMapWidth;
+
+	unsigned char* WMAP;
+	unsigned int WMAP_SIZE;
+	unsigned char* SMAP;
+	unsigned int SMAP_SIZE;
+};
+
 };

@@ -14,7 +14,6 @@
 
 //Shader
 #include "ASCN.h"
-#include "ASCR.h"
 #include "ACCN.h"
 #include "FSHD.h"
 
@@ -169,10 +168,6 @@ LAYER* LAYER::LOAD(IFF::NODE* node)
 				{
 					layer = new ASCN(node->children[1]->data, node->children[1]->size);
 				}
-				else if(nameStart[3] == 'R')
-				{
-					layer = new ASCR(node->children[1]->data, node->children[1]->size);
-				}
 			}
 			else if(nameStart[2] == 'R')
 			{
@@ -301,15 +296,6 @@ ACCN::ACCN(unsigned char* data, unsigned int dataSize)
 ASCN::ASCN(unsigned char* data, unsigned int dataSize)
 {
 	type = LAYER_ASCN;
-
-	this->data = new unsigned char[dataSize];
-	memcpy(this->data, data, dataSize);
-	this->size = dataSize;
-}
-
-ASCR::ASCR(unsigned char* data, unsigned int dataSize)
-{
-	type = LAYER_ASCR;
 
 	this->data = new unsigned char[dataSize];
 	memcpy(this->data, data, dataSize);

@@ -29,12 +29,11 @@ namespace TerrainLib
 		LAYER_FHGT, //Filter Height
 		LAYER_FSLP, //Filter Slope
 		LAYER_ASCN, //Affector Shader Constant
-		LAYER_ASCR, //Affector Shader Replace
 		LAYER_ACCN, //Affector Color Constant
 		LAYER_FSHD, //Filter Shader
 		LAYER_AHCN, //Affector Height Constant
 		LAYER_AHFR, //Affector Height Fractal
-		LAYER_AHFT, //Affector Height Terrace
+		//LAYER_AHFT, //Affector Height Terrace
 		LAYER_AFSC, //Affector Flora Static Collidable
 		LAYER_AFSN, //Affector Flora Static Non-Collidable
 		LAYER_AFDN, //Affector Flora Dynamic Near
@@ -45,8 +44,8 @@ namespace TerrainLib
 		LAYER_ARIV, //Affector River
 		LAYER_ACRF, //Affector Color Ramp Fractal
 		LAYER_ACRH, //Affector Color Ramp Height
-		LAYER_AHTR, //UNK - I suspect this has to do with height.
-		LAYER_ASRP, //UNK - I suspect this has to do with shaders.
+		LAYER_AHTR, //Affector Height Terrace
+		LAYER_ASRP, //Affector Shader Replace
 	};
 
 	class LAYER

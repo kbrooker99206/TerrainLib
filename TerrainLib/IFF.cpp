@@ -7,7 +7,8 @@ IFF::~IFF()
 	//Clean up Heads
 	for(unsigned int i=0; i < mHeads.size(); i++)
 	{
-		delete mHeads[i];
+		if(mHeads[i])
+			delete mHeads[i];
 	}
 }
 
@@ -27,8 +28,9 @@ IFF::NODE::~NODE()
 
 	while(it != end)
 	{
-		delete (*it);
-		it++;
+		NODE* ptr = *it;
+		it = children.erase(it);
+		delete ptr;
 	}
 }
 

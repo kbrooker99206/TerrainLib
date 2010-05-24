@@ -89,7 +89,6 @@
     <ClInclude Include="ARIV.h" />
     <ClInclude Include="AROA.h" />
     <ClInclude Include="ASCN.h" />
-    <ClInclude Include="ASCR.h" />
     <ClInclude Include="ASRP.h" />
     <ClInclude Include="BCIR.h" />
     <ClInclude Include="BPLN.h" />

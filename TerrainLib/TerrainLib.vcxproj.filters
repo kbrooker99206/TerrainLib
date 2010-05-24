@@ -60,9 +60,6 @@
     <ClInclude Include="FHGT.h">
       <Filter>Trn\Layers\Filters</Filter>
     </ClInclude>
-    <ClInclude Include="ASCR.h">
-      <Filter>Trn\Layers\Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="ASCN.h">
       <Filter>Trn\Layers\Shaders</Filter>
     </ClInclude>

@@ -23,19 +23,12 @@ namespace TerrainLib
 		std::vector<FFAM*>* getFloraFamilies() {return &FloraFamilies;}
 		std::vector<LAYER*>* getLayers() {return &layers;}
 
-		//Basic Data
-		unsigned char* filename;
-		float map_width;
-		float chunk_width;
-		int   tiles_per_chunk;
-		int   header_type;
-		float global_water_height;
-		float water_shader_size;
-		unsigned char* water_shader_name;
-		float seconds_per_world_cycle;
+		HEADER* getHeaderData(){return &header;}
+		FOOTER* getFooterData(){return &footer;}
 
 	private:
-		void _handleBasicData(unsigned char* data, unsigned int dataSize);
+		void _loadHeader(unsigned char* data, unsigned int dataSize);
+		void _loadFooter(IFFLib::IFF::NODE* parentNode);
 		LAYER* Trn::_loadLayer(IFFLib::IFF::NODE* parent);
 
 		//Indicates an error.
@@ -43,13 +36,16 @@ namespace TerrainLib
 
 		//+++ TERRAIN VARIABLES BELOW +++
 
+		HEADER header;
+
 		std::vector<SFAM*> ShaderFamilies;
 		std::vector<FFAM*> FloraFamilies;
 		std::vector<RFAM*> RadialFloraFamilies;
 		std::vector<EFAM*> EnvironmentFamilies;
 		std::vector<MFAM*> FractalFamilies;
-
 		std::vector<LAYER*> layers;
+
+		FOOTER footer;
 	};
 
 };
